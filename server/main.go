@@ -1,17 +1,17 @@
 package main
 
 import (
-	"log"
-
 	"github.com/gofiber/fiber/v2"
+	"github.com/shch989/React_Fiber_Login_App/database"
+	"github.com/shch989/React_Fiber_Login_App/routes"
 )
 
 func main() {
+	database.Connect()
+
 	app := fiber.New()
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World!")
-	})
+	routes.Setup(app)
 
-	log.Fatal(app.Listen(":8080"))
+	app.Listen(":8080")
 }
